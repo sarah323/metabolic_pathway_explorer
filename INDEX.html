@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Biomedical Learning Platform – Metabolic Simulator | Sarah Salah</title>
+    <meta name="description" content="Interactive educational simulator for exploring insulin signaling, metabolic regulation, and clinical case studies. Designed for medical and biomedical sciences education.">
+    <meta name="keywords" content="insulin signaling, metabolic simulator, medical education, biochemistry, insulin resistance, DKA, insulinoma, type 2 diabetes, FOXO1, GLUT4, PI3K, AKT, mTORC1">
+    <meta name="author" content="Sarah Salah, MD">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sarah323.github.io/interactive_biomedical_learning/metabolic-simulator/">
+    <meta property="og:title" content="Interactive Biomedical Learning Platform – Metabolic Simulator">
+    <meta property="og:description" content="Explore insulin signaling, metabolic regulation, and disease pathophysiology through interactive visualization.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sarah323.github.io/interactive_biomedical_learning/metabolic-simulator/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Metabolic Simulator – Interactive Biomedical Learning">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Metabolic Simulator",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web Browser",
+            "description": "Interactive educational simulator for exploring insulin signaling, metabolic regulation, and clinical case studies.",
+            "author": { "@type": "Person", "name": "Sarah Salah", "jobTitle": "Assistant Lecturer of Medical Biochemistry & Molecular Biology", "affiliation": { "@type": "Organization", "name": "Faculty of Medicine, Alexandria University" } },
+            "version": "1.0.0",
+            "url": "https://sarah323.github.io/interactive_biomedical_learning/metabolic-simulator/"
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Loading -->
+    <div id="loadingOverlay">
+        <span class="loader-text">Interactive Biomedical Learning Platform</span>
+        <div class="loader-dot"></div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="global-header" role="banner">
+        <div class="header-inner">
+            <div class="header-brand">
+                <span class="header-platform">Interactive Biomedical Learning Platform</span>
+                <h1 class="header-title">Metabolic Simulator</h1>
+                <p class="header-subtitle">Interactive Insulin Signaling, Metabolic Regulation &amp; Clinical Case Explorer</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+                <div class="header-dev">
+                    <strong>Sarah Salah, MD</strong><br>
+                    Assistant Lecturer · Medical Biochemistry &amp; Molecular Biology<br>
+                    Faculty of Medicine · Alexandria University
+                </div>
+                <div class="header-buttons">
+                    <button class="header-btn" onclick="openModal('aboutModal')" aria-label="About this simulator">About</button>
+                    <button class="header-btn" onclick="openModal('objectivesModal')" aria-label="Learning objectives">Learning Objectives</button>
+                    <button class="header-btn" onclick="openModal('referencesModal')" aria-label="References">References</button>
+                    <button class="header-btn" onclick="openModal('citationModal')" aria-label="How to cite">Citation</button>
+                    <a href="https://github.com/sarah323/interactive_biomedical_learning" target="_blank" rel="noopener" class="header-btn icon-btn" aria-label="GitHub repository">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://orcid.org/0009-0001-7198-0515" target="_blank" rel="noopener" class="header-btn icon-btn" aria-label="ORCID profile">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="currentColor">iD</text></svg>
+                        ORCID
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="nav-bar" role="navigation" aria-label="Module navigation">
+        <div class="nav-inner" id="navTabs">
+            <button class="nav-tab active" data-module="module1"><span class="tab-num">1</span>Pathway Explorer</button>
+            <button class="nav-tab" data-module="module2"><span class="tab-num">2</span>Disease Explorer</button>
+            <button class="nav-tab" data-module="module3"><span class="tab-num">3</span>Metabolic Simulator</button>
+            <button class="nav-tab" data-module="module4"><span class="tab-num">4</span>Lab Report</button>
+            <button class="nav-tab" data-module="module5"><span class="tab-num">5</span>Comparison Dashboard</button>
+            <button class="nav-tab" data-module="module6"><span class="tab-num">6</span>Self-Assessment</button>
+            <button class="nav-tab" data-module="module7"><span class="tab-num">7</span>High-Yield Summary</button>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- MODULE 1: PATHWAY EXPLORER -->
+        <section class="module active" id="module1" aria-labelledby="m1-heading">
+            <div class="module-card">
+                <h2 id="m1-heading">Module 1 — Molecular Pathway Explorer</h2>
+                <p class="module-desc">Adjust insulin level and tissue sensitivity to observe real‑time changes in intracellular signalling. <strong>Effective signal = insulin × sensitivity.</strong> Normal fasting insulin &lt;10 µIU/mL; postprandial up to 100 µIU/mL.</p>
+                <div class="preset-buttons" id="m1PresetButtons">
+                    <button class="preset-btn preset-active" onclick="setMapPreset('normal')">Normal Physiology</button>
+                    <button class="preset-btn" onclick="setMapPreset('insulinoma')">Insulinoma</button>
+                    <button class="preset-btn" onclick="setMapPreset('dka')">DKA</button>
+                    <button class="preset-btn" onclick="setMapPreset('t2dm')">T2DM</button>
+                </div>
+                <div class="slider-row">
+                    <div class="slider-box">
+                        <label>Insulin: <strong id="mapInsLevel">10</strong> µIU/mL</label>
+                        <input type="range" id="mapInsSlider" min="0" max="100" value="10" oninput="updateMap()" aria-label="Insulin level slider">
+                    </div>
+                    <div class="slider-box">
+                        <label>Sensitivity: <strong id="mapSensLevel">8</strong>/10</label>
+                        <input type="range" id="mapSensSlider" min="0" max="10" value="8" oninput="updateMap()" aria-label="Insulin sensitivity slider">
+                    </div>
+                </div>
+                <div class="svg-container">
+                    <svg viewBox="0 0 900 650" id="pathwaySvg" aria-label="Insulin signaling pathway diagram" role="img">
+                        <rect width="900" height="650" fill="#ffffff"/>
+                        <text x="450" y="30" text-anchor="middle" font-size="14" fill="#7f8c8d" font-family="Segoe UI, sans-serif">Blue = active signalling; grey = inactive. Thresholds reflect known selective insulin resistance.</text>
+                        <circle cx="80" cy="300" r="28" fill="#bdc3c7" id="irNode"/>
+                        <text x="80" y="306" text-anchor="middle" fill="white" font-weight="bold" font-size="14">IR</text>
+                        <path d="M108 300 Q150 400 200 344" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrIR_IRS"/>
+                        <circle cx="220" cy="330" r="24" fill="#bdc3c7" id="irsNode"/>
+                        <text x="220" y="336" text-anchor="middle" fill="white" font-weight="bold" font-size="13">IRS1</text>
+                        <line x1="244" y1="320" x2="300" y2="280" stroke="#bdc3c7" stroke-width="3" id="arrIRS_PI3K"/>
+                        <circle cx="320" cy="275" r="24" fill="#bdc3c7" id="pi3kNode"/>
+                        <text x="320" y="281" text-anchor="middle" fill="white" font-weight="bold" font-size="13">PI3K</text>
+                        <path d="M344 270 Q370 250 390 290" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrPI3K_AKT"/>
+                        <circle cx="420" cy="300" r="30" fill="#bdc3c7" id="aktNode"/>
+                        <text x="420" y="307" text-anchor="middle" fill="white" font-weight="bold" font-size="14">AKT</text>
+                        <path d="M440 275 Q490 180 550 150" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_AS160"/>
+                        <circle cx="570" cy="145" r="22" fill="#bdc3c7" id="as160Node"/>
+                        <text x="570" y="151" text-anchor="middle" fill="white" font-weight="bold" font-size="12">AS160</text>
+                        <line x1="592" y1="145" x2="640" y2="145" stroke="#bdc3c7" stroke-width="3" id="arrAS160_GLUT4"/>
+                        <rect x="660" y="125" width="80" height="40" rx="8" fill="#bdc3c7" id="glut4Node"/>
+                        <text x="700" y="150" text-anchor="middle" font-size="12" fill="white">GLUT4</text>
+                        <text x="700" y="185" text-anchor="middle" font-size="12" fill="#2c3e50" id="glut4Status">No transloc.</text>
+                        <path d="M400 280 Q320 160 240 110" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_FOXO"/>
+                        <circle cx="220" cy="105" r="22" fill="#e67e22" id="foxoNode"/>
+                        <text x="220" y="112" text-anchor="middle" fill="white" font-weight="bold" font-size="13">FOXO1</text>
+                        <text x="220" y="145" text-anchor="middle" font-size="13" fill="#2c3e50" id="foxoStatus">Active</text>
+                        <text x="220" y="165" text-anchor="middle" font-size="12" fill="#e67e22" id="foxoEffect">(GNG ON)</text>
+                        <path d="M440 320 Q490 410 548 410" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_mTOR"/>
+                        <circle cx="580" cy="410" r="28" fill="#bdc3c7" id="mtorNode"/>
+                        <text x="580" y="416" text-anchor="middle" fill="white" font-weight="bold" font-size="14">mTORC1</text>
+                        <path d="M610 410 L 635 410 L 662 455" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrmTOR_SREBP"/>
+                        <circle cx="690" cy="455" r="28" fill="#bdc3c7" id="srebpNode"/>
+                        <text x="690" y="461" text-anchor="middle" fill="white" font-weight="bold" font-size="14">SREBP‑1c</text>
+                        <text x="690" y="498" text-anchor="middle" font-size="12" fill="#2c3e50" id="srebpStatus">Inactive</text>
+                        <text x="690" y="518" text-anchor="middle" font-size="11" fill="#2ecc71" id="srebpEffect">(Lipogenesis OFF)</text>
+                        <path d="M400 320 Q280 440 180 510" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_HSL"/>
+                        <circle cx="160" cy="520" r="22" fill="#e74c3c" id="hslNode"/>
+                        <text x="160" y="527" text-anchor="middle" fill="white" font-weight="bold" font-size="13">HSL</text>
+                        <text x="160" y="560" text-anchor="middle" font-size="12" fill="#2c3e50" id="hslStatus">Active</text>
+                        <text x="160" y="580" text-anchor="middle" font-size="11" fill="#e74c3c" id="hslEffect">(Lipolysis HIGH)</text>
+                        <path d="M440 320 Q480 450 520 510" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_LPL"/>
+                        <circle cx="540" cy="520" r="22" fill="#bdc3c7" id="lplNode"/>
+                        <text x="540" y="527" text-anchor="middle" fill="white" font-weight="bold" font-size="13">LPL</text>
+                        <text x="540" y="560" text-anchor="middle" font-size="12" fill="#2c3e50" id="lplStatus">Inactive</text>
+                        <text x="540" y="580" text-anchor="middle" font-size="11" fill="#3498db" id="lplEffect">(TG clearance low)</text>
+                        <path d="M400 320 Q370 450 340 520" stroke="#bdc3c7" stroke-width="3" fill="none" id="arrAKT_GSK3"/>
+                        <circle cx="340" cy="530" r="22" fill="#f1c40f" id="gsk3Node"/>
+                        <text x="340" y="537" text-anchor="middle" fill="#2c3e50" font-weight="bold" font-size="12">GSK3</text>
+                        <text x="340" y="570" text-anchor="middle" font-size="12" fill="#2c3e50" id="gsk3Status">Active</text>
+                        <text x="340" y="590" text-anchor="middle" font-size="11" fill="#f1c40f" id="gsk3Effect">(Glycogen synth. OFF)</text>
+                    </svg>
+                </div>
+                <div id="mapComment" class="info-callout"></div>
+            </div>
+        </section>
+
+        <!-- MODULE 2: DISEASE EXPLORER -->
+        <section class="module" id="module2" aria-labelledby="m2-heading">
+            <div class="module-card">
+                <h2 id="m2-heading">Module 2 — Disease Explorer</h2>
+                <p class="module-desc">Select a disease state to view detailed pathophysiology, hormonal profiles, and biochemical abnormalities. The pathway in Module 1 updates automatically.</p>
+                <div class="disease-grid" id="diseaseGrid">
+                    <div class="disease-card selected" data-disease="normal" onclick="selectDisease('normal')" tabindex="0" role="button" aria-pressed="true">
+                        <span class="disease-badge" style="background:#27ae60;">Euglycaemia</span>
+                        <h4>Normal Physiology</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Balanced insulin signalling with appropriate metabolic responses.</p>
+                    </div>
+                    <div class="disease-card" data-disease="insulinoma" onclick="selectDisease('insulinoma')" tabindex="0" role="button" aria-pressed="false">
+                        <span class="disease-badge" style="background:#2980b9;">Hypoglycaemia</span>
+                        <h4>Insulinoma</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Autonomous insulin hypersecretion from pancreatic β‑cell tumour.</p>
+                    </div>
+                    <div class="disease-card" data-disease="dka" onclick="selectDisease('dka')" tabindex="0" role="button" aria-pressed="false">
+                        <span class="disease-badge" style="background:#c0392b;">Metabolic Emergency</span>
+                        <h4>Diabetic Ketoacidosis (DKA)</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Absolute insulin deficiency with rampant lipolysis and ketogenesis.</p>
+                    </div>
+                    <div class="disease-card" data-disease="t2dm" onclick="selectDisease('t2dm')" tabindex="0" role="button" aria-pressed="false">
+                        <span class="disease-badge" style="background:#e67e22;">Insulin Resistance</span>
+                        <h4>Type 2 Diabetes Mellitus</h4>
+                        <p style="font-size:0.85rem;color:var(--text-muted);">Compensatory hyperinsulinaemia with selective hepatic insulin resistance.</p>
+                    </div>
+                </div>
+                <div class="disease-detail" id="diseaseDetail"></div>
+            </div>
+        </section>
+
+        <!-- MODULE 3: METABOLIC STATE SIMULATOR -->
+        <section class="module" id="module3" aria-labelledby="m3-heading">
+            <div class="module-card">
+                <h2 id="m3-heading">Module 3 — Interactive Metabolic State Simulator</h2>
+                <p class="module-desc">Manipulate insulin concentration and tissue sensitivity to observe enzyme activities and clinical biomarkers in real time.</p>
+                <div class="preset-buttons" id="m3PresetButtons">
+                    <button class="preset-btn preset-active" onclick="s2_setCase('normal')">Normal Physiology</button>
+                    <button class="preset-btn" onclick="s2_setCase('insulinoma')">Insulinoma (Case A)</button>
+                    <button class="preset-btn" onclick="s2_setCase('dka')">T1D DKA (Case B)</button>
+                    <button class="preset-btn" onclick="s2_setCase('t2dm')">T2DM (Case C)</button>
+                </div>
+                <div class="slider-row">
+                    <div class="slider-box">
+                        <label>Insulin Level: <strong id="s2_insVal">5</strong></label>
+                        <input type="range" id="s2_insSlider" min="0" max="10" value="5" oninput="s2_update()" aria-label="Insulin level for metabolic simulator">
+                    </div>
+                    <div class="slider-box">
+                        <label>Insulin Sensitivity: <strong id="s2_sensVal">8</strong></label>
+                        <input type="range" id="s2_sensSlider" min="0" max="10" value="8" oninput="s2_update()" aria-label="Insulin sensitivity for metabolic simulator">
+                    </div>
+                </div>
+                <div class="dashboard-2col">
+                    <div class="panel">
+                        <h4 style="margin-top:0;">Enzyme Activities</h4>
+                        <div class="metric">
+                            <div class="metric-header"><span>FOXO1</span><span id="s2_foxo1Label">Suppressed</span></div>
+                            <div class="bar-track"><div id="s2_foxo1Bar" class="bar-fill" style="background:#e67e22;width:0%;"></div></div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header"><span>SREBP‑1c</span><span id="s2_srebpLabel">Moderate</span></div>
+                            <div class="bar-track"><div id="s2_srebpBar" class="bar-fill" style="background:#27ae60;width:0%;"></div></div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header"><span>HSL</span><span id="s2_hslLabel">Inhibited</span></div>
+                            <div class="bar-track"><div id="s2_hslBar" class="bar-fill" style="background:#c0392b;width:0%;"></div></div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-header"><span>LPL</span><span id="s2_lplLabel">High Clearance</span></div>
+                            <div class="bar-track"><div id="s2_lplBar" class="bar-fill" style="background:#2980b9;width:0%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <h4 style="margin-top:0;">Biomarkers</h4>
+                        <div class="biomarker-row"><span>Glucose</span><span class="value" id="s2_glucose">90 mg/dL</span></div>
+                        <div class="biomarker-row"><span>Triglycerides</span><span class="value" id="s2_tg">Normal</span></div>
+                        <div class="biomarker-row"><span>Ketones</span><span class="value" id="s2_ketones">Low</span></div>
+                        <div class="biomarker-row"><span><strong>Metabolic Mode</strong></span><span class="value" id="s2_mode">Balanced</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 4: LAB REPORT -->
+        <section class="module" id="module4" aria-labelledby="m4-heading">
+            <div class="module-card">
+                <h2 id="m4-heading">Module 4 — Virtual Patient Laboratory Report</h2>
+                <p class="module-desc">Select a clinical scenario to view expected laboratory values with interpretation.</p>
+                <div class="preset-buttons">
+                    <button class="preset-btn preset-active" onclick="s3_generateReport('normal')">Normal</button>
+                    <button class="preset-btn" onclick="s3_generateReport('insulinoma')">Insulinoma</button>
+                    <button class="preset-btn" onclick="s3_generateReport('dka')">DKA</button>
+                    <button class="preset-btn" onclick="s3_generateReport('t2dm')">T2DM</button>
+                </div>
+                <div class="case-badge" id="caseIndicator" style="background:#27ae60;">Current: Normal</div>
+                <table class="data-table">
+                    <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td>Plasma Glucose</td><td id="s3_glucose">—</td></tr>
+                        <tr><td>Insulin (µIU/mL)</td><td id="s3_ins">—</td></tr>
+                        <tr><td>C‑peptide (ng/mL)</td><td id="s3_cpep">—</td></tr>
+                        <tr><td>Beta‑hydroxybutyrate (mmol/L)</td><td id="s3_bhb">—</td></tr>
+                        <tr><td>Triglycerides</td><td id="s3_tg">—</td></tr>
+                        <tr><td>pH / HCO₃⁻</td><td id="s3_ph">—</td></tr>
+                        <tr><td>Clinical Note</td><td id="s3_note">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MODULE 5: COMPARISON DASHBOARD -->
+        <section class="module" id="module5" aria-labelledby="m5-heading">
+            <div class="module-card">
+                <h2 id="m5-heading">Module 5 — Comprehensive Comparison Dashboard</h2>
+                <p class="module-desc">Click any column header to highlight a case, or click any row label to highlight a parameter across all cases. Original colours remain visible.</p>
+                <div style="overflow-x:auto;">
+                    <table class="heatmap-table" id="unifyingHeatmap">
+                        <thead>
+                            <tr>
+                                <th class="row-label" style="background:#2c3e50;color:#fff;">Parameter</th>
+                                <th onclick="focusHeatmapCase('normal')">Normal</th>
+                                <th onclick="focusHeatmapCase('insulinoma')">Insulinoma</th>
+                                <th onclick="focusHeatmapCase('dka')">DKA</th>
+                                <th onclick="focusHeatmapCase('t2dm')">T2DM</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="info-callout" id="heatmapDescription"></div>
+            </div>
+        </section>
+
+        <!-- MODULE 6: SELF-ASSESSMENT -->
+        <section class="module" id="module6" aria-labelledby="m6-heading">
+            <div class="module-card">
+                <h2 id="m6-heading">Module 6 — Self-Assessment Quiz</h2>
+                <p class="module-desc">Test your understanding of insulin signalling, insulin resistance, and metabolic disease. Immediate feedback with detailed explanations.</p>
+                <div class="quiz-score" id="quizScore">Score: 0 / 10</div>
+                <div id="quizContainer"></div>
+                <div style="text-align:center;margin-top:16px;">
+                    <button class="preset-btn" onclick="resetQuiz()">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 7: HIGH-YIELD SUMMARY -->
+        <section class="module" id="module7" aria-labelledby="m7-heading">
+            <div class="module-card">
+                <h2 id="m7-heading">Module 7 — High-Yield Summary</h2>
+                <p class="module-desc">Key concepts, clinical pearls, and memory aids for examination revision.</p>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h4>🔑 Key Concepts</h4>
+                        <ul style="font-size:0.88rem;padding-left:1.2em;">
+                            <li><strong>Insulin → IR → IRS1 → PI3K → AKT</strong> is the core metabolic cascade.</li>
+                            <li>AKT suppresses <strong>FOXO1</strong> (gluconeogenesis OFF) and activates <strong>mTORC1 → SREBP‑1c</strong> (lipogenesis ON).</li>
+                            <li>AKT inhibits <strong>HSL</strong> (lipolysis OFF) and activates <strong>LPL</strong> (TG clearance).</li>
+                            <li><strong>AS160</strong> phosphorylation by AKT enables GLUT4 translocation.</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h4>💡 Clinical Pearls</h4>
+                        <ul style="font-size:0.88rem;padding-left:1.2em;">
+                            <li><strong>Insulinoma:</strong> Inappropriately elevated insulin + C‑peptide during hypoglycaemia.</li>
+                            <li><strong>DKA:</strong> Absolute insulin deficiency → HSL unrestrained → massive lipolysis → ketone body production → metabolic acidosis.</li>
+                            <li><strong>T2DM:</strong> Selective hepatic insulin resistance — FOXO1 stays active (gluconeogenesis continues) while SREBP‑1c is paradoxically active (VLDL overproduction).</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h4>⚠️ Common Exam Mistakes</h4>
+                        <ul style="font-size:0.88rem;padding-left:1.2em;">
+                            <li>Confusing <strong>C‑peptide</strong> levels: elevated in insulinoma &amp; early T2DM; low/absent in DKA &amp; exogenous insulin use.</li>
+                            <li>Forgetting that <strong>FOXO1</strong> is active when AKT is off — driving hepatic glucose output.</li>
+                            <li>Overlooking that <strong>mTORC1‑SREBP‑1c</strong> can be active even when the rest of the pathway is resistant (selective resistance).</li>
+                        </ul>
+                    </div>
+                    <div class="summary-card">
+                        <h4>🧠 Memory Tips</h4>
+                        <ul style="font-size:0.88rem;padding-left:1.2em;">
+                            <li><strong>"AKT kicks FOXO out"</strong> — AKT phosphorylates FOXO1 → nuclear exclusion → GNG OFF.</li>
+                            <li><strong>"No insulin = No LPL, Lots of HSL"</strong> — DKA features lipaemic serum from unchecked lipolysis.</li>
+                            <li><strong>"IR → IRS → PI3K → AKT → AS160 → GLUT4"</strong> — the glucose uptake chain.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top:16px;">
+                    <strong>📋 High-Yield Comparison:</strong> In <strong>DKA</strong>, insulin is absent → FOXO1 active, SREBP‑1c off, HSL fully active. In <strong>T2DM</strong>, insulin is high but sensitivity is low → FOXO1 remains active (hepatic glucose output), yet mTORC1‑SREBP‑1c paradoxically drives lipogenesis. This explains the atherogenic dyslipidaemia characteristic of T2DM.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="global-footer" role="contentinfo">
+        <div class="footer-row">
+            <span>© 2026 <strong>Sarah Salah</strong></span>
+            <span>Interactive Biomedical Learning Platform</span>
+            <span class="cc-badge">CC BY 4.0</span>
+            <span>Version 1.0.0</span>
+        </div>
+        <div style="margin-top:6px;">
+            <a href="https://github.com/sarah323/interactive_biomedical_learning" target="_blank" rel="noopener">GitHub</a> ·
+            <a href="https://orcid.org/0009-0001-7198-0515" target="_blank" rel="noopener">ORCID</a> ·
+            DOI: Coming soon via Zenodo
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+    <!-- About Modal -->
+    <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+        <div class="modal-dialog">
+            <button class="modal-close" onclick="closeModal('aboutModal')" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <h3 id="aboutTitle">About the Metabolic Simulator</h3>
+                <h4>Purpose</h4>
+                <p>This interactive educational simulator provides a dynamic environment for exploring insulin signalling, metabolic regulation, and disease pathophysiology. Rather than memorizing pathways, learners visualize how insulin concentration and tissue sensitivity influence intracellular signalling, enzyme regulation, laboratory findings, and clinical disease states.</p>
+                <h4>Target Audience</h4>
+                <ul><li>Medical students</li><li>Biomedical sciences students</li><li>Pharmacy students</li><li>Medical laboratory sciences students</li><li>Postgraduate trainees</li><li>Medical educators</li></ul>
+                <h4>Developer</h4>
+                <p><strong>Sarah Salah, MD</strong><br>Assistant Lecturer of Medical Biochemistry &amp; Molecular Biology<br>Faculty of Medicine, Alexandria University</p>
+                <h4>GitHub</h4>
+                <p><a href="https://github.com/sarah323/interactive_biomedical_learning" target="_blank" rel="noopener">github.com/sarah323/interactive_biomedical_learning</a></p>
+                <h4>ORCID</h4>
+                <p><a href="https://orcid.org/0009-0001-7198-0515" target="_blank" rel="noopener">orcid.org/0009-0001-7198-0515</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Objectives Modal -->
+    <div class="modal-overlay" id="objectivesModal" role="dialog" aria-modal="true" aria-labelledby="objTitle">
+        <div class="modal-dialog">
+            <button class="modal-close" onclick="closeModal('objectivesModal')" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <h3 id="objTitle">Learning Objectives</h3>
+                <p>After completing this module, learners should be able to:</p>
+                <ul>
+                    <li>Explain insulin receptor signalling.</li>
+                    <li>Describe PI3K-AKT activation.</li>
+                    <li>Explain GLUT4 translocation.</li>
+                    <li>Interpret FOXO1 regulation.</li>
+                    <li>Explain mTORC1 signalling.</li>
+                    <li>Describe SREBP‑1c mediated lipogenesis.</li>
+                    <li>Explain regulation of HSL and LPL.</li>
+                    <li>Interpret laboratory findings.</li>
+                    <li>Differentiate insulinoma, DKA, and type 2 diabetes.</li>
+                    <li>Apply biochemical principles to clinical cases.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- References Modal -->
+    <div class="modal-overlay" id="referencesModal" role="dialog" aria-modal="true" aria-labelledby="refTitle">
+        <div class="modal-dialog">
+            <button class="modal-close" onclick="closeModal('referencesModal')" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <h3 id="refTitle">References</h3>
+                <p style="font-size:0.85rem;color:var(--text-muted);">Vancouver style. Authoritative sources only.</p>
+                <div class="ref-item">1. Nelson DL, Cox MM. <em>Lehninger Principles of Biochemistry.</em> 9th ed. New York: W.H. Freeman; 2025.</div>
+                <div class="ref-item">2. Rodwell VW, Bender DA, Botham KM, et al. <em>Harper's Illustrated Biochemistry.</em> 33rd ed. New York: McGraw-Hill; 2023.</div>
+                <div class="ref-item">3. Hall JE, Hall ME. <em>Guyton &amp; Hall Textbook of Medical Physiology.</em> 15th ed. Philadelphia: Elsevier; 2025.</div>
+                <div class="ref-item">4. Melmed S, Auchus RJ, Goldfine AB, et al. <em>Williams Textbook of Endocrinology.</em> 15th ed. Philadelphia: Elsevier; 2024.</div>
+                <div class="ref-item">5. American Diabetes Association. Standards of Care in Diabetes — 2025. <em>Diabetes Care.</em> 2025;48(Suppl 1).</div>
+                <div class="ref-item">6. Saltiel AR, Olefsky JM. Inflammatory mechanisms linking obesity and metabolic disease. <em>Nat Rev Endocrinol.</em> 2017;13(1):1-16. <a href="https://doi.org/10.1038/nrendo.2016.150" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">7. Haeusler RA, McGraw TE, Accili D. Metabolic signalling: biochemical and cellular properties of insulin receptor signalling. <em>Nat Rev Mol Cell Biol.</em> 2018;19(1):31-44. <a href="https://doi.org/10.1038/nrm.2017.99" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">8. Petersen MC, Shulman GI. Mechanisms of insulin action and insulin resistance. <em>Physiol Rev.</em> 2018;98(4):2133-2223. <a href="https://doi.org/10.1152/physrev.00063.2017" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">9. Czech MP. Insulin action and resistance in obesity and type 2 diabetes. <em>Nat Med.</em> 2017;23(7):804-814. <a href="https://doi.org/10.1038/nm.4350" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">10. Brown MS, Goldstein JL. Selective versus total insulin resistance: a pathogenic paradox. <em>Cell Metab.</em> 2008;7(2):95-96. <a href="https://doi.org/10.1016/j.cmet.2007.12.009" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">11. Rosen ED, Spiegelman BM. What we talk about when we talk about fat. <em>Cell.</em> 2014;156(1-2):20-44. <a href="https://doi.org/10.1016/j.cell.2013.12.012" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">12. Taylor R, Holman RR. Normal weight individuals who develop type 2 diabetes: the personal fat threshold. <em>Lancet Diabetes Endocrinol.</em> 2015;3(6):447-454. <a href="https://doi.org/10.1016/S2213-8587(15)00085-6" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">13. Ferrannini E, Natali A, Bell P, et al. Insulin resistance and hypersecretion in obesity. <em>J Clin Invest.</em> 1997;100(5):1166-1173. <a href="https://doi.org/10.1172/JCI119628" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">14. Zimmet P, Alberti KG, Shaw J. Global and societal implications of the diabetes epidemic. <em>Nature.</em> 2001;414(6865):782-787. <a href="https://doi.org/10.1038/414782a" target="_blank" rel="noopener">DOI</a></div>
+                <div class="ref-item">15. DeFronzo RA, Ferrannini E, Groop L, et al. Type 2 diabetes mellitus. <em>Nat Rev Dis Primers.</em> 2015;1:15019. <a href="https://doi.org/10.1038/nrdp.2015.19" target="_blank" rel="noopener">DOI</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Citation Modal -->
+    <div class="modal-overlay" id="citationModal" role="dialog" aria-modal="true" aria-labelledby="citeTitle">
+        <div class="modal-dialog">
+            <button class="modal-close" onclick="closeModal('citationModal')" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <h3 id="citeTitle">How to Cite</h3>
+                <p><strong>APA</strong></p>
+                <div class="cite-block" id="citeAPA">Salah, S. (2026). <em>Interactive Biomedical Learning Platform: Metabolic Simulator</em> (Version 1.0.0) [Interactive simulation]. GitHub. https://github.com/sarah323/interactive_biomedical_learning</div>
+                <p><strong>Vancouver</strong></p>
+                <div class="cite-block">Salah S. Interactive Biomedical Learning Platform: Metabolic Simulator. Version 1.0.0. GitHub; 2026. Available from: https://github.com/sarah323/interactive_biomedical_learning</div>
+                <p><strong>BibTeX</strong></p>
+                <div class="cite-block" id="citeBibTeX">@misc{salah2026metabolic,
+                    author = {Sarah Salah},
+                    title = {Interactive Biomedical Learning Platform: Metabolic Simulator},
+                    version = {1.0.0},
+                    year = {2026},
+                    publisher = {GitHub},
+                    url = {https://github.com/sarah323/interactive_biomedical_learning},
+                    note = {CC BY 4.0}
+                    }</div>
+                <p><strong>DOI:</strong> Coming soon via Zenodo</p>
+                <p><strong>ORCID:</strong> <a href="https://orcid.org/0009-0001-7198-0515" target="_blank" rel="noopener">0009-0001-7198-0515</a></p>
+                <button class="copy-btn" onclick="copyCitation()">Copy APA Citation</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
