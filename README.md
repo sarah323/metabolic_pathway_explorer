@@ -1,49 +1,48 @@
-Metabolic Pathway Explorer
+# Metabolic Pathway Explorer
 
 An interactive biomedical learning platform for exploring insulin regulation, metabolic homeostasis, and clinical metabolic disorders through dynamic visualization and simulation.
 
-Overview
+## Overview
 
-Metabolic Pathway Explorer is an open educational software resource designed to help learners understand how changes in insulin concentration and tissue sensitivity influence intracellular signaling, metabolic pathways, biochemical markers, and disease states.
+**Metabolic Pathway Explorer** is an open educational software resource designed to help learners understand how changes in insulin concentration and tissue sensitivity influence intracellular signaling, metabolic pathways, biochemical markers, and disease states.
 
 Rather than memorizing isolated pathways, learners can explore the relationship between:
 
-* Insulin signaling activity
-* PI3K–AKT pathway regulation
-* GLUT4 translocation
-* FOXO1-mediated gluconeogenesis
-* mTORC1/SREBP-1c lipogenesis
-* Hormone-sensitive lipase (HSL) regulation
-* Lipoprotein lipase (LPL) activity
-* Clinical biochemical changes in metabolic disorders
+- Insulin signaling activity
+- PI3K–AKT pathway regulation
+- GLUT4 translocation
+- FOXO1-mediated gluconeogenesis
+- mTORC1/SREBP-1c lipogenesis
+- Hormone-sensitive lipase (HSL) regulation
+- Lipoprotein lipase (LPL) activity
+- Clinical biochemical changes in metabolic disorders
 
-Features
+## Features
 
-Interactive Pathway Explorer
+### Interactive Pathway Explorer
 
-* Adjust insulin levels and insulin sensitivity
-* Visualize changes in intracellular signaling activity
-* Explore downstream metabolic effects
+- Adjust insulin levels and insulin sensitivity
+- Visualize changes in intracellular signaling activity
+- Explore downstream metabolic effects
 
-Disease Explorer
+### Disease Explorer
 
 Includes interactive cases of:
 
-* Normal physiology
-* Insulinoma
-* Diabetic ketoacidosis (DKA)
-* Type 2 diabetes mellitus (T2DM)
+- Normal physiology
+- Insulinoma
+- Diabetic ketoacidosis (DKA)
+- Type 2 diabetes mellitus (T2DM)
 
-Metabolic State Simulator
+### Metabolic State Simulator
 
 Allows learners to manipulate metabolic parameters and observe:
 
-* Enzyme activity changes
-* Glucose regulation
-* Triglyceride metabolism
-* Ketone body production
-* Overall metabolic state
-
+- Enzyme activity changes
+- Glucose regulation
+- Triglyceride metabolism
+- Ketone body production
+- Overall metabolic state
 Virtual Laboratory Report
 
 Provides simulated biochemical profiles with interpretation for different clinical scenarios.
