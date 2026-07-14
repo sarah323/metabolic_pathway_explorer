@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: “If you use this educational software, please cite it as follows.”
+
+title: “Metabolic Pathway Explorer”
+
+type: software
+
+authors:
+
+* family-names: Salah
+    given-names: Sarah
+    orcid: “https://orcid.org/0009-0001-7198-0515”
+
+version: “1.0.0”
+
+date-released: “2026-07-14”
+
+repository-code: “https://github.com/sarah323/metabolic_pathway_explorer”
+
+url: “https://sarah323.github.io/metabolic_pathway_explorer/”
+
+license: “CC-BY-4.0”
+
+abstract: >
+An interactive biomedical learning platform for exploring insulin regulation,
+metabolic pathways, and clinical metabolic disorders through dynamic
+visualization, simulation, and virtual laboratory cases.
